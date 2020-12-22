@@ -46,7 +46,6 @@ class Solution {
             second.next = first;
             
             p = first;
-            head = first.next;
         }
         
        
