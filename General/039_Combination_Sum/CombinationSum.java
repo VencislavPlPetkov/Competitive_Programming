@@ -44,7 +44,8 @@
 
 class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        
+        Arrays.sort(candidates);
+
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         
         findCombinations(candidates, target, result, new LinkedList<Integer>(), 0);
@@ -65,7 +66,7 @@ class Solution {
          for(int i = startIndex; i < candidates.length; i++){
              
             if (candidates[i] > target) break;
-            
+
             combination.add(candidates[i]);
              
             findCombinations(candidates, target-candidates[i], result, combination, i);
