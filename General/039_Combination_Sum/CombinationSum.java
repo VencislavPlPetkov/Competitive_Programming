@@ -60,11 +60,12 @@ class Solution {
              return;
          }
          
-         if(target < 0) return;
          
         
          for(int i = startIndex; i < candidates.length; i++){
              
+            if (candidates[i] > target) break;
+            
             combination.add(candidates[i]);
              
             findCombinations(candidates, target-candidates[i], result, combination, i);
