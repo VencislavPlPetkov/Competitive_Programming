@@ -21,36 +21,39 @@
 
 
 
-
-
 class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        Arrays.sort(intervals, (a,b) -> Integer.compare(a[0], b[0]));        
+        
+        List<int[]> result = new ArrayList<>();
+        
+        int[] current_interval = intervals[0];
+        
+        result.add(current_interval);
+        
+        for(int[] interval : intervals){
+            
+            int currentBegin = current_interval[0];
+            int currentEnd = current_interval[1];
+            
+            int nextBegin = interval[0];
+            int nextEnd = interval[1];
+            
+            if(currentEnd >= nextBegin){
+                current_interval[1] = Math.max(currentEnd, nextEnd);
+            } else {
+                current_interval = interval;
+                result.add(current_interval);
+            }
+            
+        }
+ 
+        
+        return result.toArray(new int[result.size()][]);
+    }
+}
 
-	public int[][] merge(int[][] intervals) {
-	  
-		if (intervals.length <= 1) {
-			return intervals;
-		}
-		
-		Arrays.sort(intervals, (arr1,arr2) -> Integer.compare(arr1[0], arr2[0]));
-		
-		LinkedList <int[]> output = new LinkedList<>();
-		
-		for (int[] interval : intervals) {
-			
-			
-			if (output.isEmpty() || interval[0] > output.getLast()[1]) {
-				
-				output.add(interval);
-				
-			} else {
-				
-				output.getLast()[1] = Math.max(interval[1], output.getLast()[1]);
-			}
-			
-		}
-		
-		
-		return output.toArray(new int[output.size()][]);
-	}
-  }
-  
+
+
+
